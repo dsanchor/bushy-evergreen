@@ -61,11 +61,11 @@ public class ReindeerManagerResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response manageReindeers(Service service) {
-		log.fine("Input data: " + (service != null ? service.toString() : "none"));
+		log.info("Input data: " + (service != null ? service.toString() : "none"));
 		try {
 			Service output= null;
 			if ((output = bushyEvergreenService.manageReindeers(service))!=null) {
-				log.fine("Output service: " + output);
+				log.info("Output service: " + output);
 				return buildResponse(Status.OK, "Bushy evergreen service rocks!");
 			} else {
 				String msg= "Could not manage reindeers: Unexpected error";
