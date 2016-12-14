@@ -7,15 +7,15 @@ app.use(bodyParser.json());
 
 app.post('/', function(request, response){
   console.log("Request Body: " + request.body);      // Log Req
-  var reqJson = JSON.parse(request.body);
+  //var reqJson = JSON.parse(request.body);
 
   function compare(a,b) {
 	  if (a.reindeerName < b.reindeerName) return -1;
 	  if (a.reindeerName > b.reindeerName) return 1;
 	  return 0;
   }
-
-   reqJson.sort(compare);          
+  request.body.sort(compare);
+   //reqJson.sort(compare);          
   
   response.body = JSON.stringify(reqJson);
   response.send(response.body);                       // echo the Req
