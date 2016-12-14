@@ -9,6 +9,7 @@ var cc               = require('config-multipaas'),
 var config   = cc();
 var app      = Router()
 
+
 // Serve up public/ftp folder 
 app.use(serveStatic('static'))
 
