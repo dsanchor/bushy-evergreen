@@ -65,9 +65,10 @@ public class BushyEvergreenService {
 				payload.add(team);
 			}
 		}
-
-		for (Team team : inputPayload) {
-			payload.add(team);
+		if (inputPayload!=null) {
+			for (Team team : inputPayload) {
+				payload.add(team);
+			}
 		}
 		return payload.toArray(new Team[payload.size()]);
 	}
