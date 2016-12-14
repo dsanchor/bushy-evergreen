@@ -6,8 +6,9 @@ var app = express();
 app.use(bodyParser.json());
 
 app.post('/', function(request, response){
-  console.log(request.body);      // JSON Req
+  console.log("Request Body: " + request.body);      // JSON Req
   response.send(request.body);    // echo the Req
+  console.log("Response Body: " + response.body);      // JSON Req
 });
 
 app.listen(8080);
