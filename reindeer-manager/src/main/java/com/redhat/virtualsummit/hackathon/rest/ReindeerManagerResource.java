@@ -31,6 +31,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.redhat.virtualsummit.hackathon.model.Service;
+import com.redhat.virtualsummit.hackathon.service.BushyEvergreenService;
+import com.redhat.virtualsummit.hackathon.service.ProxyNotificationService;
+import com.redhat.virtualsummit.hackathon.util.Constants;
 
 /**
  * JAX-RS Example
@@ -44,6 +47,10 @@ public class ReindeerManagerResource {
 
 	@Inject
 	private Logger log;
+	
+	@Inject
+	BushyEvergreenService bushyEvergreenService;
+	
 
 	/**
 	 * 
@@ -53,12 +60,18 @@ public class ReindeerManagerResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response manageService(Service service) {
-		log.fine("Input service: " + (service != null ? service.toString() : "none"));
+	public Response manageReindeers(Service service) {
+		log.fine("Input data: " + (service != null ? service.toString() : "none"));
 		try {
-			// TODO call stateless service(s)
-			log.fine("Output service: " + (service != null ? service.toString() : "none"));
-			return buildResponse(Status.OK, "Proxy service successfully called");
+			Service output= null;
+			if ((output = bushyEvergreenService.manageReindeers(service))!=null) {
+				log.fine("Output service: " + output);
+				return buildResponse(Status.OK, "Bushy evergreen service rocks!");
+			} else {
+				String msg= "Could not manage reindeers: Unexpected error";
+				log.severe(msg);
+				return buildResponse(Status.INTERNAL_SERVER_ERROR, msg);
+			}
 		} catch (Exception e) {
 			log.severe("Error: " + e.getMessage());
 			return buildResponse(Status.INTERNAL_SERVER_ERROR, e.getMessage());
@@ -68,8 +81,7 @@ public class ReindeerManagerResource {
 	private Response buildResponse(Response.Status status, String additionalInfo) {
 		Map<String, String> responseObj = new HashMap<String, String>();
 		responseObj.put("info", additionalInfo);
-		// FIXME
-		responseObj.put("service", "FIXME");
+		responseObj.put("service", System.getenv(Constants.HOSTNAME_ENV));
 		return Response.status(status).entity(responseObj).build();
 
 	}

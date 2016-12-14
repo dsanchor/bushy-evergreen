@@ -8,7 +8,7 @@ public class Team {
 
 	private String reindeerName;
 
-	private Map<String, String> nameEmailMap;
+	private Map<String, String> nameEmaiMap;
 
 	public String getTeamName() {
 		return teamName;
@@ -18,8 +18,8 @@ public class Team {
 		return reindeerName;
 	}
 
-	public Map<String, String> getNameEmailMap() {
-		return nameEmailMap;
+	public Map<String, String> getNameEmaiMap() {
+		return nameEmaiMap;
 	}
 
 	public void setTeamName(String teamName) {
@@ -30,15 +30,15 @@ public class Team {
 		this.reindeerName = reindeerName;
 	}
 
-	public void setNameEmailMap(Map<String, String> nameEmailMap) {
-		this.nameEmailMap = nameEmailMap;
+	public void setNameEmailap(Map<String, String> nameEmaiMap) {
+		this.nameEmaiMap = nameEmaiMap;
 	}
 
 	@Override
 	public String toString() {
 		return "Team [teamName=" + (teamName != null ? teamName : "(not-provided)") + ", reindeerName="
 				+ (reindeerName != null ? reindeerName : "(not-provided)") + ", nameEmailMapSize="
-				+ (nameEmailMap != null ? nameEmailMap.size() : "0") + "]";
+				+ (nameEmaiMap != null ? nameEmaiMap.size() : "0") + "]";
 	}
 
 }
