@@ -17,7 +17,7 @@ app.post('/', function(request, response){
   request.body.sort(compare);
    //reqJson.sort(compare);          
   
-  response.body = JSON.stringify(reqJson);
+  response.body = JSON.stringify(request.body);
   response.send(response.body);                       // echo the Req
   console.log("Response Body: " + response.body);    // Log Response
 });
