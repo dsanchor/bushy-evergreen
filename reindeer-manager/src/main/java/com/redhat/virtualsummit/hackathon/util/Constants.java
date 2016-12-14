@@ -22,7 +22,7 @@ public class Constants {
 	public static final String PROXY_REQUESTPATH_ENV = "PROXY_REQUEST_PATH";
 	
 	// sorter service calls
-	public static final String SORTER_READY_ENV = "SORTER_RADY";
+	public static final String SORTER_READY_ENV = "SORTER_READY";
 	public static final String SORTER_HOST_ENV = "SORTER_HOST";
 	public static final String SORTER_PORT_ENV = "SORTER_PORT";
 	public static final String SORTER_REQUESTPATH_ENV = "SORTER_REQUEST_PATH";
