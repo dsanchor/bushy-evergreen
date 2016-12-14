@@ -16,6 +16,7 @@ app.post('/sorter', function(request, response){
   request.body.sort(compare);
   
   response.body = JSON.stringify(request.body);
+  response.setHeader('Content-Type', 'application/json');
   response.send(response.body);                       // echo the Req
   console.log("Response Body: " + response.body);    // Log Response
 });
