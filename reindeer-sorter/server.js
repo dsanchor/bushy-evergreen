@@ -1,39 +1,25 @@
-var cc               = require('config-multipaas'),
-    finalhandler     = require('finalhandler'),
-    http             = require("http"),
-    Router           = require('router'),
-    fs               = require('fs'),
-    serveStatic      = require("serve-static"),
-    express          = require('express');
+var express = require('express'),
+    bodyParser = require('body-parser');
 
-var config   = cc();
-var app      = Router()
+var app = express();
 
+app.use(bodyParser.json());
 
-// Serve up public/ftp folder 
-app.use(serveStatic('static'))
+app.post('/', function(request, response){
+  console.log("Request Body: " + request.body);      // Log Req
+  var reqJson = JSON.parse(request.body);
 
-// Routes
-app.use('/public', express.static('public'));
-app.get("/status", function (req, res) {
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'application/json; charset=utf-8')
-  res.end("{status: 'ok'}\n")
-})
+  function compare(a,b) {
+	  if (a.reindeerName < b.reindeerName) return -1;
+	  if (a.reindeerName > b.reindeerName) return 1;
+	  return 0;
+  }
 
-app.get("/", function (req, res) {
-  var index = fs.readFileSync(__dirname + '/index.html')
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'text/html; charset=utf-8')
-  res.end(index.toString())
-})
-
-// Create server 
-var server = http.createServer(function(req, res){
-  var done = finalhandler(req, res)
-  app(req, res, done)
-})
-
-server.listen(config.get('PORT'), config.get('IP'), function () {
-  console.log( "Listening on " + config.get('IP') + ", port " + config.get('PORT') )
+   reqJson.sort(compare);          
+  
+  response.body = JSON.stringify(reqJson);
+  response.send(response.body);                       // echo the Req
+  console.log("Response Body: " + response.body);    // Log Response
 });
+
+app.listen(8080);
